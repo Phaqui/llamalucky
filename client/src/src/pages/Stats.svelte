@@ -21,6 +21,7 @@
   });
 </script>
 
+
 <div class="container">
   <div class="ways centered">
     {#each ways as way, i}
@@ -33,7 +34,7 @@
 
   <div id="verdict" class="centered">
     <h1>&#187; Verdict</h1>
-    <p>Currently, Mr Llama is NOT unlucky</p>
+    <p>Unknown as of yet, need more data points!</p>
   </div>
 
   <div>
@@ -102,11 +103,23 @@
     border-left: 0.5em solid #732b2b;
     border-top-left-radius: 5%;
     border-bottom-left-radius: 1%;
+    margin-bottom: 0;
     background:
       linear-gradient(40deg, rgba(240, 194, 135, 0.2) 70%, 70%, rgba(30, 38, 37, 0)),
       linear-gradient(80deg, rgba(240, 224, 89, 0.7) 60%, 60%, rgba(30, 38, 37, 0)),
       linear-gradient(60deg, rgba(240, 194, 155, 0.4) 70%, 70%, rgba(30, 38, 37, 0)),
       linear-gradient(135deg, rgba(240, 194, 135, 0.3) 70%, 70%, rgba(30, 38, 37, 0));
+  }
+
+  #verdict > p {
+    padding: 1em 5em 1em 8em;
+    color: #20071b;
+    font-size: 1.5em;
+    border-top-right-radius: 25%;
+    background:
+      linear-gradient(40deg, rgba(30, 38, 37, 1) 20%, 20%, rgba(175, 195, 220, 0.3), 90%, rgba(0, 0, 0, 0) 90%),
+      linear-gradient(80deg, rgba(30, 38, 37, 1) 20%, 20%, rgba(175, 195, 220, 0.8), 90%, rgba(0, 0, 0, 0) 90%),
+      linear-gradient(140deg, rgba(30, 38, 37, 1) 10%, 10%, rgba(175, 195, 220, 0.4));
   }
 
 </style>

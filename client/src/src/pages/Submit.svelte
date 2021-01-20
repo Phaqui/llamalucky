@@ -80,7 +80,7 @@
         <option value="3">3rd way</option>
         <option value="4">4th way</option>
       </select>
-      <button on:click={() => remove(i)}>Remove</button>
+      <button class="remove" on:click={() => remove(i)}>✖</button>
     </div>
   {/each}
 
@@ -93,5 +93,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  button.remove {
+    padding: 2px;
+    background-color: transparent;
+    color: rgb(230, 110, 110);
+    font-size: 1.5em;
+    border: 1px solid transparent;
+    box-shadow: none;
   }
 </style>
