@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+
+sqlalchemy
+databases[postgresql]
+asyncpg
+
+# to be able to use engine.create_all()
+psycopg2-binary

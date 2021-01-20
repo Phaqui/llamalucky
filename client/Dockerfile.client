@@ -1,0 +1,9 @@
+FROM node:15-buster
+
+WORKDIR /usr/src/client
+
+RUN chmod 777 /root
+
+EXPOSE 8080
+
+CMD [ "npm", "start" ]
