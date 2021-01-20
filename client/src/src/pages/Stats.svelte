@@ -32,7 +32,7 @@
   </div>
 
   <div id="verdict" class="centered">
-    <h1>Verdict</h1>
+    <h1>&#187; Verdict</h1>
     <p>Currently, Mr Llama is NOT unlucky</p>
   </div>
 
@@ -96,5 +96,17 @@
     font-style: italic;
   }
 
+  #verdict > h1 {
+    padding: 1em 10em 1em 3em;
+    color: #20071b;
+    border-left: 0.5em solid #732b2b;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 1%;
+    background:
+      linear-gradient(40deg, rgba(240, 194, 135, 0.2) 70%, 70%, rgba(30, 38, 37, 0)),
+      linear-gradient(80deg, rgba(240, 224, 89, 0.7) 60%, 60%, rgba(30, 38, 37, 0)),
+      linear-gradient(60deg, rgba(240, 194, 155, 0.4) 70%, 70%, rgba(30, 38, 37, 0)),
+      linear-gradient(135deg, rgba(240, 194, 135, 0.3) 70%, 70%, rgba(30, 38, 37, 0));
+  }
 
 </style>
