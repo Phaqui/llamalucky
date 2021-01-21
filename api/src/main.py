@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import sqlalchemy
 from sqlalchemy.sql.expression import insert
 import databases
+from scipy.stats import chi2_contingency
 
 DATABASE_URL = "postgresql://postgres:password@db/postgres"
 
@@ -89,11 +90,22 @@ async def get_index():
             elif num == "4":
                 fourth += 1
 
+    tot = first + second + third + fourth
+    avg = tot / 4
+    table = [
+        [first, second, third, fourth],
+        [avg]*4
+    ]
+    stat, p, dof, expected = chi2_contingency(table)
+
+    print(f"from stats: p={p}")
     return dict(
         first=first,
         second=second,
         third=third,
-        fourth=fourth
+        fourth=fourth,
+        p=p,
+        lucky=first + second > third + fourth
     )
 
 

@@ -7,3 +7,6 @@ asyncpg
 
 # to be able to use engine.create_all()
 psycopg2-binary
+
+# for them statisticz
+scipy

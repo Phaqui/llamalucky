@@ -3,8 +3,59 @@
 
   const server_url = "http://localhost:8000";
 
+  // data we will recieve from the api
+  // lucky = #1st ways + #2nd ways > #3rd ways + #4th ways
+  //   that is, considered "lucky" if more early ways (1st, 2nd),
+  //   and unlucky if more later (3rd, 4th) ways
+  let p = -1;
   let records = [0, 0, 0, 0];
-  let ways = ["1st", "2nd", "3rd", "4th"];
+
+  const ways = ["1st", "2nd", "3rd", "4th"];
+
+  let verdict = "(waiting for api...)";
+
+  function determine_verdict() {
+    verdict = "";
+
+    let anyunder10 = records.some(val => val < 10);
+    let anyunder20 = records.some(val => val < 20);
+    let anyunder40 = records.some(val => val < 40);
+    let anyunder75 = records.some(val => val < 75);
+
+    let anyunderx = [anyunder10, anyunder20, anyunder40, anyunder75, true];
+
+    // 0, 1, 2, 3, 4
+    let idx = anyunderx.indexOf(true);
+    switch (idx) {
+      case 0:
+        verdict = "Undetermined. Needs more data!";
+        return;
+      case 1:
+        verdict = "It's possible that";
+        break;
+      case 2:
+        verdict = "It's likely that";
+        break;
+      case 3:
+        verdict = "It's very likely that";
+        break;
+      case 4:
+        verdict = "It's practically confirmed that";
+        break;
+    }
+
+    if (p < 0.05) {
+      // reject h0 (distribution non-uniform)
+
+      // define "lucky" to be more 1st and 2nd ways, and
+      // "unlucky" to be more 3rd and 4th ways
+      const lucky = records[0] + records[1] > records[2] + records[3]
+      verdict += `MrLlama is truly ${lucky ? '' : 'un'}lucky`;
+    } else {
+      // accept h0 (distribution is uniform)
+      verdict += `MrLlma sees an equal amount of ways.`;
+    }
+  }
 
   onMount(async () => {
     let response = await fetch(server_url + "/");
@@ -17,6 +68,8 @@
         data.third,
         data.fourth
       ];
+      p = data.p;
+      determine_verdict();
     }
   });
 </script>
@@ -34,7 +87,22 @@
 
   <div id="verdict" class="centered">
     <h1>&#187; Verdict</h1>
-    <p>Unknown as of yet, need more data points!</p>
+    <p>{verdict}</p>
+  </div>
+
+  <div id="verdict_how" class="centered">
+    <p>
+      Results based on a Chi-square independency test of 2 variables,
+      one of which are these numbers above, and the other a "correction"
+      result which is uniform with cell values equal to the average of
+      the sum of the 4 column points above.
+    </p>
+
+    <p>
+      Disclaimer: I have no clue about statistics, I relied on the
+      interwebs to come up with this. I encourage anyone who actually
+      knows statistics to reach out for me, and yell at me, or tell me
+      that I actually was correct (not likely).</p>
   </div>
 
   <div>
