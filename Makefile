@@ -1,4 +1,7 @@
 
+publish:
+	./publish.sh
+
 down:
 	docker-compose down
 
@@ -14,3 +17,6 @@ tail:
 
 psql:
 	docker exec -it llamalucky_db_1 psql -U postgres -d postgres
+
+apishell:
+	docker exec -it llamalucky_api_1 python
