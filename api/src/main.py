@@ -1,4 +1,5 @@
 import sys
+import os
 import asyncio
 from typing import Optional
 import datetime
@@ -18,9 +19,21 @@ DATABASE_URL = "postgresql://postgres:password@db/postgres"
 
 app = FastAPI()
 
+
+
+# yeah, this'll have to do for now...
+try:
+    origin = os.environ["ORIGIN"]
+except KeyError:
+    # maybe a warning?
+    origin = "http://localhost:8080"
+
 origins = [
-    "http://localhost:8080"
+    origin
 ]
+
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
