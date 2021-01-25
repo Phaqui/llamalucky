@@ -1,0 +1,11 @@
+version: '3.3'
+
+services:
+    api:
+        ports:
+            - 80:80
+        environment:
+            - PHA_DEPLOY_MODE_PROD=yes
+    db:
+        volumes:
+            - /var/lib/postgresql/data:/var/lib/postgresql/data

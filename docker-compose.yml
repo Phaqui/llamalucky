@@ -4,20 +4,7 @@ networks:
     frontend:
     backend:
 
-volumes:
-    dbdata:
-
 services:
-    web:
-        build:
-            context: ./client
-            dockerfile: Dockerfile.client
-        volumes:
-            - ./client/src:/usr/src/client
-        networks:
-            - frontend
-        ports:
-            - 8080:8080
     api:
         build:
             context: ./api
@@ -25,10 +12,6 @@ services:
         networks:
             - frontend
             - backend
-        ports:
-            - 8000:8000
-        volumes:
-            - ./api/src:/usr/src/api/src
         environment:
             - PGHOST=db
             - PGUSER=postgres
@@ -41,6 +24,4 @@ services:
         environment:
             POSTGRES_PASSWORD: password
             PGDATA: /var/lib/postgresql/data
-        volumes:
-            - dbdata:/var/lib/postgresql/data
 

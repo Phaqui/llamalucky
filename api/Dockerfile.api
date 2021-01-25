@@ -6,9 +6,8 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY run-gunicorn.sh .
+COPY run.sh .
+COPY src/ .
 
-#EXPOSE 8000
-
-CMD [ "./run-gunicorn.sh" ]
+CMD [ "./run.sh" ]
 

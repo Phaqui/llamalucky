@@ -1,0 +1,26 @@
+version: '3.3'
+
+volumes:
+    dbdata:
+
+services:
+    web:
+        build:
+            context: ./client
+            dockerfile: Dockerfile.client
+        volumes:
+            - ./client/src:/usr/src/client
+        networks:
+            - frontend
+        ports:
+            - 8080:8080
+    api:
+        ports:
+            - 8000:8000
+        volumes:
+            - ./api/src:/usr/src/api/src
+        environment:
+            - PHA_DEPLOY_MODE_DEV=yes
+    db:
+        volumes:
+            - dbdata:/var/lib/postgresql/data
