@@ -80,7 +80,7 @@
     {#each ways as way, i}
       <div class="way">
         <h2>{records[i]}</h2>
-        <p>Number of {way} ways on record</p>
+        <p>Number of confirmed {way} ways on record</p>
       </div>
     {/each}
   </div>

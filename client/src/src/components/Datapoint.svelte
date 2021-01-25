@@ -6,17 +6,17 @@
   export let selected = 0;
 
   function set_selected(way: number) {
-    selected = way;
-    dispatch('selected', way);
+    selected = selected === way ? 0 : way;
+    dispatch('selected', selected);
   }
 </script>
 
 <div class="container">
   <div>Run #{run}</div>
-  {#each [0, 1, 2, 3] as way, i}
+  {#each [1, 2, 3, 4] as way}
     <button
       on:click={() => set_selected(way)}
-      class:selected={selected === way}>{way+1}</button>
+      class:selected={selected === way}>{way}</button>
   {/each}
   <div class="delete" on:click={() => dispatch('delete')}>✕</div>
 </div>

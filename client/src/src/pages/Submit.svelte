@@ -1,10 +1,15 @@
 <script lang="ts">
-  type EvType = KeyboardEvent & { target: EventTarget & HTMLInputElement };
+  import { fly } from 'svelte/transition';
+  import { quintOut } from 'svelte/easing';
   import Modal from './../components/Modal.svelte';
   import Datapoint from './../components/Datapoint.svelte';
+
+  type EvType = KeyboardEvent & { target: EventTarget & HTMLInputElement };
+
   const server_url = "http://localhost:8000";
 
   let modal_showing = false;
+  let ytid_input = "";
   enum YTID_STATE {
     NotInitd = "notinitd",
     ParseError = "parseerror",
@@ -14,10 +19,12 @@
     NotOk = "notok"
   };
 
-  let ytid_input = "";
   let ytid_status: YTID_STATE = YTID_STATE.NotInitd;
-  $: can_submit = datapoints.length > 0 && ytid_status === YTID_STATE.Ok;
   $: ytid_status_text = get_ytid_status_text(ytid_status);
+  $: can_submit =
+    datapoints.length > 0 &&
+    datapoints.every(dp => dp > 0) &&
+    ytid_status === YTID_STATE.Ok;
 
   let timeout_id: number | null = null;
   function on_input_keyup(ev: EvType) {
@@ -25,7 +32,6 @@
       window.clearTimeout(timeout_id);
     }
     const text = ev.target.value;
-    console.log(text);
 
     if (text === "") {
       ytid_status = YTID_STATE.NotInitd;
@@ -96,7 +102,7 @@
     return ok ? YTID_STATE.Ok : YTID_STATE.NotOk;
   }
 
-  let datapoints: Array<number> = [1];
+  let datapoints: Array<number> = [0];
 
   function remove(idx: number) {
     datapoints.splice(idx, 1);
@@ -123,7 +129,7 @@
     });
 
     if (response.status === 201) {
-      datapoints = [1];
+      datapoints = [0];
       ytid_input = '';
       modal_showing = true;
     } else {
@@ -161,17 +167,24 @@
 
   <div id="datapoints">
     {#each datapoints as dp, i}
-      <Datapoint
-        run={i + 1}
-        on:selected={way => set_selected(i, way.detail)}
-        on:delete={() => remove(i)}
-      />
+      <div
+        out:fly="{{ x: -100, duration: 250, easing: quintOut }}"
+        class="datapoint">
+        <Datapoint
+          run={i + 1}
+          on:selected={way => set_selected(i, way.detail)}
+          on:delete={() => remove(i)}
+        />
+      </div>
     {/each}
 
-    <button class="add" on:click={add}>Add row</button>
+    <button class="add" on:click={add}>Add run</button>
   </div>
 
-  <button on:click={submitResults} disabled={!can_submit}>
+  <button
+    id="submit-btn"
+    on:click={submitResults}
+    disabled={!can_submit}>
     Submit findings
   </button>
 </div>
@@ -182,7 +195,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 100%;
+    height: 90vh;
   }
 
   label {
@@ -214,11 +227,19 @@
   #ytid-status.error { color: orange; }
 
   #datapoints {
+    width: 80vw;
+    height: 40vh;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 1em;
-    border: 0;
     margin: 0.3em;
+  }
+
+  .datapoint {
+
   }
 
   button.add {
@@ -241,6 +262,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+  }
+
+  #submit-btn {
+    margin-top: 0;
   }
 </style>

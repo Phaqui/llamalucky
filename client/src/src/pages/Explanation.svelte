@@ -25,6 +25,13 @@
     feature several or many runs through the Arcane, so be sure to get
     them all before you submit!).
   </p>
+  <p>
+    Note: When you submit your information, it will not not show up
+    on the stats page before at least 4 other people have submitted the same
+    run information for the same video. When at least 5 people have submitted
+    the same run-data for the same video, that statistic will be considered
+    confirmed, and will be included in the actual check for how lucky MrLlama is.
+  </p>
 </blockquote>
 
 <blockquote>
