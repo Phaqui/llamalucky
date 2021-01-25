@@ -23,7 +23,8 @@ app = FastAPI()
 
 # yeah, this'll have to do for now...
 try:
-    origin = os.environ["ORIGIN"]
+    # "LLL" prefix for project: "LLamaLucky"
+    origin = os.environ["LLL_ORIGIN"]
 except KeyError:
     # maybe a warning?
     origin = "http://localhost:8080"
