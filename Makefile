@@ -19,4 +19,4 @@ psql:
 	docker exec -it llamalucky_db_1 psql -U postgres -d postgres
 
 apishell:
-	docker exec -it llamalucky_api_1 python
+	docker exec -it llamalucky_api_1 /bin/bash

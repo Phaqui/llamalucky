@@ -90,21 +90,6 @@
     <p>{verdict}</p>
   </div>
 
-  <div id="verdict_how" class="centered">
-    <p>
-      Results based on a Chi-square independency test of 2 variables,
-      one of which are these numbers above, and the other a "correction"
-      result which is uniform with cell values equal to the average of
-      the sum of the 4 column points above.
-    </p>
-
-    <p>
-      Disclaimer: I have no clue about statistics, I relied on the
-      interwebs to come up with this. I encourage anyone who actually
-      knows statistics to reach out for me, and yell at me, or tell me
-      that I actually was correct (not likely).</p>
-  </div>
-
   <div>
     <button>more stats</button>
   </div>

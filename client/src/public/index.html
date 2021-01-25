@@ -29,6 +29,24 @@
             filter: grayscale(80%);
         }
     </style>
+    <script>
+        // gapi initialization
+        const apiKey = "AIzaSyCBIaxa--TARwpaVr21sSQ86IfnIoRL25U";
+        const discoveryDocs = [
+            'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
+        ];
+
+        function load_gapi() {
+            console.log("Loading google api...");
+            gapi.load('client', function callback() {
+                console.log("gapi loaded");
+                gapi.client.init({ apiKey, discoveryDocs })
+                    .then(() => console.log("gapi.client loaded"));
+            });
+        }
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};load_gapi();"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

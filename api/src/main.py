@@ -113,7 +113,6 @@ class SubmissionItem(BaseModel):
 async def get_index():
     return cached_result
 
-
 async def calculate_p():
     log("Entering calculate_p()")
     rows = await database.fetch_all(query=text("""
