@@ -3,10 +3,9 @@
   import { quintOut } from 'svelte/easing';
   import Modal from './../components/Modal.svelte';
   import Datapoint from './../components/Datapoint.svelte';
+  import { server_url } from './../server.ts';
 
   type EvType = KeyboardEvent & { target: EventTarget & HTMLInputElement };
-
-  const server_url = "http://localhost:8000";
 
   let modal_showing = false;
   let ytid_input = "";

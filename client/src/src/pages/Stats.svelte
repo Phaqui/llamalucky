@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
-  const server_url = "http://localhost:8000";
+  import { server_url } from './../server.ts';
 
   // data we will recieve from the api
   // lucky = #1st ways + #2nd ways > #3rd ways + #4th ways
