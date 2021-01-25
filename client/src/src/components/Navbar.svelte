@@ -7,7 +7,7 @@
   <a class="menuitem" use:link href="/explanation">What</a>
   <a class="menuitem" use:link href="/submit">Submit</a>
   <a class="menuitem" use:link href="/stats">Stats</a>
-  <a class="push" href="https://github.com/phaqui">
+  <a class="push" href="https://github.com/Phaqui/llamalucky">
     <img src="/GitHub-Mark-64px.png" alt="GitHub Mark" />
   </a>
 </nav>
