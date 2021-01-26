@@ -8,7 +8,6 @@ services:
     api:
         build:
             context: ./api
-            dockerfile: Dockerfile.api
         networks:
             - frontend
             - backend
